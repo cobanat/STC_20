@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration>
+    <Appenders>
+        <RollingFile name="rollingFile"
+                     fileName="logs/log4j2.log"
+                     filePattern="logs/$${date:yyyy-MM}/app-%d{MM-dd-yyyy}-%i.log.gz">
+            <PatternLayout>
+                <Pattern>%d %p %c{1.} [%t] %m%n</Pattern>
+            </PatternLayout>
+            <Policies>
+                <TimeBasedTriggeringPolicy interval = "1" />
+                <SizeBasedTriggeringPolicy
+                        size="250 MB" />
+            </Policies>
+        </RollingFile>
+        <JDBC name="db" tableName="APP_LOGS">
+            <DriverManager connectionString="jdbc:postgresql://localhost:5432/Testing" driverClassName="org.postgresql.Driver"
+                       username="postgres" password="admin"/>
+            <Column name="LOG_ID" pattern="%u" isUnicode="false"/>
+            <Column name="ENTRY_DATE" isEventTimestamp="true" isUnicode="false"/>
+            <Column name="LOGGER" pattern="%logger" isUnicode="false"/>
+            <Column name="LOG_LEVEL" pattern="%level" isUnicode="false"/>
+            <Column name="MESSAGE" pattern="%m" isUnicode="false"/>
+            <Column name="EXCEPTION" pattern="%throwable " isUnicode="false"/>
+        </JDBC>
+        <Console name="stdout" target="SYSTEM_OUT">
+            <PatternLayout pattern="%m%n"/>
+        </Console>
+    </Appenders>
+
+    <Loggers>
+        <Root level="trace">
+            <AppenderRef ref="stdout" level="INFO"/>
+        </Root>
+        <Logger name="homework.part1.lesson16.Main" level="DEBUG" additivity="false">
+            <AppenderRef ref="stdout" level="INFO"/>
+            <AppenderRef ref="db" level="ERROR"/>
+            <AppenderRef ref="rollingFile" level="DEBUG"/>
+        </Logger>
+    </Loggers>
+
+</Configuration>

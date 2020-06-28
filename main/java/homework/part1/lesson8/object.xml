@@ -1,0 +1,9 @@
+class homework.part1.lesson8.entity.Person
+private java.lang.String homework.part1.lesson8.entity.Person.name Jhon
+private homework.part1.lesson8.entity.Gender homework.part1.lesson8.entity.Person.gender MALE
+private int homework.part1.lesson8.entity.Person.age 24
+private homework.part1.lesson8.entity.Pet homework.part1.lesson8.entity.Person.personPet Pet{petName='Alex', petGender=MALE, petAge=9}
+class homework.part1.lesson8.entity.Pet
+private java.lang.String homework.part1.lesson8.entity.Pet.name Alex
+private homework.part1.lesson8.entity.Gender homework.part1.lesson8.entity.Pet.gender MALE
+private int homework.part1.lesson8.entity.Pet.age 9
